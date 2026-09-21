@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFHAS </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <!-- HTML5 Shiv for IE8 support -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f4f6f9;
+            color: #1f2937;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 35px 20px 60px;
+        }
+
+        /* --------------------------------
+           Page Header
+        -------------------------------- */
+
+        .page-header {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 25px 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .page-header h1 {
+            margin: 0 0 6px;
+            font-size: 26px;
+            color: #111827;
+        }
+
+        .page-header p {
+            margin: 0;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        /* --------------------------------
+           Toolbar
+        -------------------------------- */
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .toolbar-label {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .toolbar-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 7px;
+            padding: 9px 15px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .btn-expand {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        .btn-expand:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-collapse {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .btn-collapse:hover {
+            background: #d1d5db;
+        }
+
+        /* --------------------------------
+           Date
+        -------------------------------- */
+
+        .date-group {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            margin-bottom: 18px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.035);
+        }
+
+        .date-summary {
+            padding: 17px 20px;
+            background: #f9fafb;
+            cursor: pointer;
+            list-style: none;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .date-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .date-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .date-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 9px;
+            background: #eff6ff;
+            color: #2563eb;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 17px;
+        }
+
+        .date-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #111827;
+        }
+
+        .date-count {
+            margin-top: 3px;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        .date-arrow {
+            color: #9ca3af;
+            font-size: 17px;
+            transition: transform 0.2s;
+        }
+
+        .date-group[open] .date-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* --------------------------------
+           Date Content
+        -------------------------------- */
+
+        .date-content {
+            padding: 12px 15px 15px;
+        }
+
+        /* --------------------------------
+           Labs / Radiology
+        -------------------------------- */
+
+        .category {
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            margin-top: 8px;
+            overflow: hidden;
+            background: #ffffff;
+        }
+
+        .category-summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 15px 17px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .category-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .category-summary:hover {
+            background: #f9fafb;
+        }
+
+        .category-info {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .category-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 15px;
+        }
+
+        .labs-icon {
+            background: #ecfdf5;
+            color: #059669;
+        }
+
+        .radiology-icon {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .category-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #374151;
+        }
+
+        .category-count {
+            margin-top: 3px;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        .category-arrow {
+            color: #9ca3af;
+            transition: transform 0.2s;
+        }
+
+        .category[open] .category-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* --------------------------------
+           Orders
+        -------------------------------- */
+
+        .orders {
+            padding: 0 15px 15px;
+        }
+
+        .orders-inner {
+            border-top: 1px solid #f1f3f5;
+            padding-top: 12px;
+        }
+
+        .order {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 13px 14px;
+            margin-top: 7px;
+
+            background: #f9fafb;
+            border: 1px solid #edf0f2;
+            border-radius: 8px;
+        }
+
+        .order-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .order-icon {
+            width: 28px;
+            height: 28px;
+            flex: 0 0 28px;
+
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 12px;
+        }
+
+        .order-name {
+            font-size: 13px;
+            font-weight: bold;
+            color: #374151;
+        }
+
+        .order-code {
+            margin-top: 3px;
+            font-size: 11px;
+            color: #9ca3af;
+        }
+
+        .order-status {
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .status-completed {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #a16207;
+        }
+
+        .status-cancelled {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        /* --------------------------------
+           Empty
+        -------------------------------- */
+
+        .empty {
+            padding: 20px;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 13px;
+        }
+
+        /* --------------------------------
+           Mobile
+        -------------------------------- */
+
+        @media (max-width: 650px) {
+
+            .page {
+                padding: 20px 12px 40px;
+            }
+
+            .toolbar {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .toolbar-buttons {
+                width: 100%;
+            }
+
+            .btn {
+                flex: 1;
+            }
+
+            .order {
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .order-status {
+                margin-top: 2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <div class="page-header">
+        <h1>IFHAS Orders</h1>
+        <p>Laboratory and radiology orders grouped by date.</p>
+    </div>
+
+    <div class="toolbar">
+        <div class="toolbar-label">
+            Orders are expanded by default
+        </div>
+
+        <div class="toolbar-buttons">
+            <button type="button"
+                    class="btn btn-expand"
+                    id="expandAll">
+                Expand All
+            </button>
+
+            <button type="button"
+                    class="btn btn-collapse"
+                    id="collapseAll">
+                Collapse All
+            </button>
+        </div>
+    </div>
+
+    <!--
+        The HTML below is intentionally empty.
+
+        JavaScript will generate:
+        Date
+          +-- Labs
+          ¦    +-- Order
+          ¦    +-- Order
+          ¦    +-- Order
+          ¦
+          +-- Radiology
+               +-- Order
+               +-- Order
+               +-- Order
+    -->
+
+    <div id="ordersContainer"></div>
+
+</div>
+
+
+<script>
+(function () {
+
+    /*
+     * =========================================================
+     * DATA
+     * =========================================================
+     *
+     * Replace this object with your real API/database data.
+     *
+     * Each date contains:
+     *
+     *     labs[]
+     *     radiology[]
+     *
+     */
+
+    var ordersData = [
+
+        {
+            date: "September 21, 2026",
+
+            labs: [
+                {
+                    name: "Complete Blood Count",
+                    code: "CBC",
+                    status: "Completed"
+                },
+                {
+                    name: "Basic Metabolic Panel",
+                    code: "BMP",
+                    status: "Pending"
+                },
+                {
+                    name: "Liver Function Test",
+                    code: "LFT",
+                    status: "Completed"
+                }
+            ],
+
+            radiology: [
+                {
+                    name: "Chest X-Ray",
+                    code: "CXR",
+                    status: "Completed"
+                },
+                {
+                    name: "CT Abdomen",
+                    code: "CT-ABD",
+                    status: "Pending"
+                }
+            ]
+        },
+
+
+        {
+            date: "September 20, 2026",
+
+            labs: [
+                {
+                    name: "Hemoglobin A1C",
+                    code: "HBA1C",
+                    status: "Completed"
+                },
+                {
+                    name: "Lipid Profile",
+                    code: "LIPID",
+                    status: "Completed"
+                }
+            ],
+
+            radiology: [
+                {
+                    name: "MRI Brain",
+                    code: "MRI-BRAIN",
+                    status: "Pending"
+                },
+                {
+                    name: "Ultrasound Abdomen",
+                    code: "US-ABD",
+                    status: "Completed"
+                }
+            ]
+        },
+
+
+        {
+            date: "September 19, 2026",
+
+            labs: [
+                {
+                    name: "Urinalysis",
+                    code: "UA",
+                    status: "Completed"
+                },
+                {
+                    name: "Urine Culture",
+                    code: "UC",
+                    status: "Pending"
+                }
+            ],
+
+            radiology: [
+                {
+                    name: "Abdominal X-Ray",
+                    code: "AXR",
+                    status: "Cancelled"
+                }
+            ]
+        }
+
+    ];
+
+
+    /*
+     * =========================================================
+     * HELPERS
+     * =========================================================
+     */
+
+    function escapeHtml(value) {
+
+        if (value === null || value === undefined) {
+            return "";
+        }
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+
+    function getStatusClass(status) {
+
+        var value = String(status).toLowerCase();
+
+        if (value === "completed") {
+            return "status-completed";
+        }
+
+        if (value === "pending") {
+            return "status-pending";
+        }
+
+        if (value === "cancelled") {
+            return "status-cancelled";
+        }
+
+        return "";
+    }
+
+
+    /*
+     * =========================================================
+     * BUILD ORDER HTML
+     * =========================================================
+     */
+
+    function buildOrder(order) {
+
+        return (
+            '<div class="order">' +
+
+                '<div class="order-left">' +
+
+                    '<div class="order-icon">' +
+                        '&#10004;' +
+                    '</div>' +
+
+                    '<div>' +
+
+                        '<div class="order-name">' +
+                            escapeHtml(order.name) +
+                        '</div>' +
+
+                        '<div class="order-code">' +
+                            escapeHtml(order.code) +
+                        '</div>' +
+
+                    '</div>' +
+
+                '</div>' +
+
+                '<div class="order-status ' +
+                    getStatusClass(order.status) +
+                '">' +
+                    escapeHtml(order.status) +
+                '</div>' +
+
+            '</div>'
+        );
+    }
+
+
+    /*
+     * =========================================================
+     * BUILD CATEGORY
+     * =========================================================
+     */
+
+    function buildCategory(type, orders) {
+
+        var isLabs = type === "Labs";
+
+        var iconClass = isLabs
+            ? "labs-icon"
+            : "radiology-icon";
+
+        var icon = isLabs
+            ? "&#129514;"
+            : "&#9762;";
+
+        var html = "";
+
+        html += '<details class="category" open>';
+
+        html +=
+            '<summary class="category-summary">' +
+
+                '<div class="category-info">' +
+
+                    '<div class="category-icon ' +
+                        iconClass +
+                    '">' +
+                        icon +
+                    '</div>' +
+
+                    '<div>' +
+
+                        '<div class="category-title">' +
+                            type +
+                        '</div>' +
+
+                        '<div class="category-count">' +
+                            orders.length +
+                            ' order' +
+                            (orders.length === 1 ? "" : "s") +
+                        '</div>' +
+
+                    '</div>' +
+
+                '</div>' +
+
+                '<div class="category-arrow">&#9660;</div>' +
+
+            '</summary>';
+
+
+        html += '<div class="orders">';
+        html += '<div class="orders-inner">';
+
+
+        if (orders.length === 0) {
+
+            html +=
+                '<div class="empty">' +
+                    'No orders' +
+                '</div>';
+
+        } else {
+
+            var i;
+
+            for (i = 0; i < orders.length; i++) {
+                html += buildOrder(orders[i]);
+            }
+        }
+
+
+        html += '</div>';
+        html += '</div>';
+
+        html += '</details>';
+
+        return html;
+    }
+
+
+    /*
+     * =========================================================
+     * BUILD DATE
+     * =========================================================
+     */
+
+    function buildDate(dateItem) {
+
+        var labsCount = dateItem.labs.length;
+        var radiologyCount = dateItem.radiology.length;
+
+        var totalCount = labsCount + radiologyCount;
+
+        var html = "";
+
+        html += '<details class="date-group" open>';
+
+        html +=
+            '<summary class="date-summary">' +
+
+                '<div class="date-info">' +
+
+                    '<div class="date-icon">' +
+                        '&#128197;' +
+                    '</div>' +
+
+                    '<div>' +
+
+                        '<div class="date-title">' +
+                            escapeHtml(dateItem.date) +
+                        '</div>' +
+
+                        '<div class="date-count">' +
+                            totalCount +
+                            ' total order' +
+                            (totalCount === 1 ? "" : "s") +
+                        '</div>' +
+
+                    '</div>' +
+
+                '</div>' +
+
+                '<div class="date-arrow">&#9660</div>' +
+
+            '</summary>';
+
+
+        html += '<div class="date-content">';
+
+        html += buildCategory(
+            "Labs",
+            dateItem.labs
+        );
+
+        html += buildCategory(
+            "Radiology",
+            dateItem.radiology
+        );
+
+        html += '</div>';
+
+        html += '</details>';
+
+        return html;
+    }
+
+
+    /*
+     * =========================================================
+     * RENDER EVERYTHING
+     * =========================================================
+     */
+
+    function render() {
+
+        var container =
+            document.getElementById("ordersContainer");
+
+        var html = "";
+        var i;
+
+        for (i = 0; i < ordersData.length; i++) {
+
+            html += buildDate(
+                ordersData[i]
+            );
+        }
+
+        container.innerHTML = html;
+    }
+
+
+    /*
+     * =========================================================
+     * EXPAND / COLLAPSE ALL
+     * =========================================================
+     */
+
+    function setAllOpen(isOpen) {
+
+        var details =
+            document.getElementsByTagName("details");
+
+        var i;
+
+        for (i = 0; i < details.length; i++) {
+
+            details[i].open = isOpen;
+        }
+    }
+
+
+    /*
+     * =========================================================
+     * INITIALIZE
+     * =========================================================
+     */
+
+    render();
+
+
+    document.getElementById("expandAll").onclick =
+        function () {
+
+            setAllOpen(true);
+
+        };
+
+
+    document.getElementById("collapseAll").onclick =
+        function () {
+
+            setAllOpen(false);
+
+        };
+
+
+}());
+</script>
+
+</body>
+</html>
