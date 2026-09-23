@@ -510,6 +510,31 @@
 <script>
 (function () {
 
+
+
+
+function hg_get_ccl_data(url, data) {
+  
+    
+        const request = new XMLCclRequest();
+
+        request.open("POST", url, false);
+        request.send(data);
+
+        if (request.status === 200) {
+            const response = $.parseJSON(request.responseText);
+            
+            return response;
+        } else {
+            return "Error: " + request.status;
+        }
+    
+}
+
+
+var jsonResponse = hg_get_ccl_data("hg_ifhas_packages_mpage","^MINE^," + MPAGE_REC.ENCNTR_ID);
+
+
     /*
      * =========================================================
      * DATA
